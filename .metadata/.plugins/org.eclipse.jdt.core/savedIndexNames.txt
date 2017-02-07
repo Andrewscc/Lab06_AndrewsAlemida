@@ -1,0 +1,10 @@
+INDEX VERSION 1.129+/home/andrewsaa/lab_06/.metadata/.plugins/org.eclipse.jdt.core
+143167130.index
+3954195056.index
+3408485364.index
+3648153019.index
+3541617440.index
+1919187909.index
+2618557312.index
+3533483474.index
+1522987508.index
