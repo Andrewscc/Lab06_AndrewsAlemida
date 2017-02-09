@@ -1,0 +1,8 @@
+
+public class Noob extends Usuario {
+	
+	private static final String TIPO = "Noob";
+	
+	
+
+}

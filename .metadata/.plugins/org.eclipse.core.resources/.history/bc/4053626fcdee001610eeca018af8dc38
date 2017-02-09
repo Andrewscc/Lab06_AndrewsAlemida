@@ -1,0 +1,23 @@
+
+public class Noob extends Usuario {
+
+	private static final String TIPO = "Noob";
+	private int x2p;
+
+	public Noob(String nome, double dinheiro) {
+		super(nome, dinheiro);
+		this.x2p = 0;
+
+	}
+
+	public boolean Comprar(Jogo jogo) {
+		if (this.getDinheiro() >= jogo.getPreco() * 0.9 || !this.getJogos().contains(jogo)) {
+			this.setDinheiro(this.getDinheiro() - jogo.getPreco() * 0.9);
+			return this.AdicionaJogo(jogo);
+		} else {
+			return false;
+		}
+
+	}
+
+}

@@ -1,0 +1,11 @@
+
+public class Veterano extends Usuario {
+
+	private static final String TIPO = "Veterano";
+
+	public Veterano(String nome, double dinheiro) {
+		super(nome,dinheiro);
+
+	}
+	
+}

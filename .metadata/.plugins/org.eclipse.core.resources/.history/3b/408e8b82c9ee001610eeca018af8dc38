@@ -1,0 +1,19 @@
+
+public class Noob extends Usuario {
+
+	private static final String TIPO = "Noob";
+
+	public Noob(String nome, double dinheiro) {
+		super(nome, dinheiro);
+
+	}
+	
+	public boolean Comprar(Jogo jogo){
+		if(this.getDinheiro()>= jogo.getPreco()*0.9){
+			this.setDinheiro(this.getDinheiro()-jogo.getPreco()*0.9);
+			
+		}
+			
+	}
+
+}

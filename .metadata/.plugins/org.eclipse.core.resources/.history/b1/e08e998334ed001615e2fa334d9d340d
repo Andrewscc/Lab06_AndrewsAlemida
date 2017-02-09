@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+
+public class Usuario {
+
+	private String nome;
+	private ArrayList jogos;
+	private double dinheiro;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public ArrayList getJogos() {
+		return jogos;
+	}
+
+	public void setJogos(ArrayList jogos) {
+		this.jogos = jogos;
+	}
+
+	public double getDinheiro() {
+		return dinheiro;
+	}
+
+	public void setDinheiro(double dinheiro) {
+		this.dinheiro = dinheiro;
+	}
+
+}
