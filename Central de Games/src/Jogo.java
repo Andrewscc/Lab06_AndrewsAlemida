@@ -4,14 +4,16 @@ public class Jogo {
 
 	private String nome;
 	private double preco;
+	private String tipo;
 	private int maiorScore;
 	private int qtdJogadas;
 	private int qtdZermentos;
 	private HashSet jogabilidade;
 
-	public Jogo(String nome, double preco) {
+	public Jogo(String nome, double preco, String tipo) {
 		this.nome = nome;
 		this.preco = preco;
+		this.tipo = tipo;
 		this.maiorScore = 0;
 		this.qtdJogadas = 0;
 		this.qtdZermentos = 0;
@@ -31,6 +33,10 @@ public class Jogo {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+
+	public String getTipo() {
+		return tipo;
 	}
 
 	public int getMaiorScore() {
@@ -58,9 +64,15 @@ public class Jogo {
 	}
 
 	public int registraJogada(int score, boolean zerou) {
-		if (this.getMaiorScore() < score) {
-			this.setMaiorScore(score);
+		if (this.getTipo().equals("RPG")) {
+			return 10;
+		} else if (this.getTipo().equals("Luta")) {
+			if (this.getMaiorScore() < score) {
+				this.setMaiorScore(score);
+				return score / 1000;
+			}
+		} else {
+			return this.getQtdZermentos() * 20;
 		}
-		return score;
 	}
 }
