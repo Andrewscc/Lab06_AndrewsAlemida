@@ -1,0 +1,142 @@
+package Central_de_Games;
+
+import java.util.HashSet;
+
+public class Jogo {
+
+	private String nome;
+	private double preco;
+	private int maiorScore;
+	private int qtdJogadas;
+	private int qtdZermentos;
+	private HashSet<Jogabilidade> jogabilidade;
+	private Tipo tipo;
+
+	public Jogo(String nome, double preco, Tipo tipo) throws Exception {
+		if (nome.trim().equals("") || nome == null)
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		this.nome = nome;
+		if (preco < 0)
+			throw new ParametroNumeroNegativo("Valor não pode ser negativo");
+		this.preco = preco;
+		this.maiorScore = 0;
+		this.tipo = tipo;
+		this.qtdJogadas = 0;
+		this.qtdZermentos = 0;
+		this.jogabilidade = new HashSet<>();
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) throws Exception {
+		if (nome.trim().equals("") || nome == null)
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		this.nome = nome;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) throws Exception {
+		if (preco < 0)
+			throw new ParametroNumeroNegativo("Valor não pode ser negativo");
+		this.preco = preco;
+	}
+
+	public int getMaiorScore() {
+		return maiorScore;
+	}
+
+	public void setMaiorScore(int maiorScore) throws Exception {
+		if (maiorScore < 0)
+			throw new ParametroNumeroNegativo("Valor não pode ser negativo");
+		this.maiorScore = maiorScore;
+	}
+
+	public int getQtdJogadas() {
+		return qtdJogadas;
+	}
+
+	public int getQtdZermentos() {
+		return qtdZermentos;
+	}
+
+	public void setQtdZermentos(int qtdZermentos) throws Exception {
+		if (qtdZermentos < 0)
+			throw new ParametroNumeroNegativo("Valor não pode ser negativo");
+		this.qtdZermentos = qtdZermentos;
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public int registraJogada(int score, boolean zerou) throws Exception {
+		boolean novoScore;
+		this.qtdJogadas++;
+		if (zerou)
+			this.setQtdZermentos(1);
+		if (this.getMaiorScore() < score) {
+			this.setMaiorScore(score);
+			novoScore = true;
+		} else {
+			novoScore = false;
+		}
+		if (this.getTipo().equals(Tipo.Rpg))
+			return 10;
+		else if (this.getTipo().equals(Tipo.Luta) && novoScore)
+			return score / 1000;
+		else if (this.getTipo().equals(Tipo.Plataforma) && zerou)
+			return 20;
+		else
+			return 0;
+
+	}
+
+	public void addJogabilidade(Jogabilidade jogabilidade) {
+		this.jogabilidade.add(jogabilidade);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(preco);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Jogo other = (Jogo) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (Double.doubleToLongBits(preco) != Double.doubleToLongBits(other.preco))
+			return false;
+		if (tipo != other.tipo)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "+ " + this.nome + " - " + this.tipo + "\n ==> Jogou " + this.getQtdJogadas() + " vez(es)"
+				+ "\n ==> Zerou " + this.getQtdZermentos() + " vez(es)" + "\n ==> Maior score: " + this.getMaiorScore();
+	}
+
+}

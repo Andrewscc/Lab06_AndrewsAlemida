@@ -1,0 +1,36 @@
+package Central_de_Games;
+
+public class Noob extends Usuario {
+
+	public Noob(String nome, String login) throws Exception {
+		super(nome, login);
+
+	}
+
+	@Override
+	public void Comprar(Jogo novoJogo) throws Exception {
+		if (this.getDinheiro() >= novoJogo.getPreco() * 0.9 || !this.getJogos().contains(novoJogo)) {
+			this.setDinheiro(this.getDinheiro() - novoJogo.getPreco() * 0.9);
+			this.x2pPorCompra(novoJogo);
+			this.AdicionaJogo(novoJogo);
+		}
+
+	}
+
+	@Override
+	public void x2pPorCompra(Jogo novoJogo) throws Exception {
+		this.setX2p((int) (novoJogo.getPreco() * 10));
+	}
+
+	@Override
+	public String toString() {
+		String msg = this.login + "\n" + this.nome + " - " + "Jogador " + "Noob" + "\nLista de Jogos: \n";
+		for (Jogo jogo : jogosComprados) {
+			msg += jogo.toString() + "\n";
+		}
+		msg += "\nTotal de preço dos jogos: R$" + this.getTotalPreco();
+
+		return msg;
+	}
+
+}

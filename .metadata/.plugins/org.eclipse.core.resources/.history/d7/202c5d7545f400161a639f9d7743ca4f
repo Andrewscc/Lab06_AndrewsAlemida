@@ -1,0 +1,147 @@
+package Central_de_Games;
+
+import java.util.ArrayList;
+
+public abstract class Usuario {
+
+	protected String nome;
+	protected String login;
+	protected ArrayList<Jogo> jogosComprados;
+	protected double dinheiro;
+	protected int x2p;
+
+	public Usuario(String nome, String login) throws Exception {
+		if (nome.trim().equals("") || nome == null) {
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		}
+		this.nome = nome;
+		if (login.trim().equals("") || login == null) {
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		}
+		this.login = login;
+		this.x2p = 0;
+		this.dinheiro = 0;
+		this.jogosComprados = new ArrayList<>();
+
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) throws Exception {
+		if (nome.trim().equals("") || nome == null) {
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		}
+		this.nome = nome;
+	}
+
+	public ArrayList getJogos() {
+		return jogosComprados;
+	}
+
+	public void setJogosComprados(ArrayList<Jogo> jogosComprados) {
+		this.jogosComprados = jogosComprados;
+	}
+
+	public boolean AdicionaJogo(Jogo novoJogo) {
+		if (!this.getJogos().contains(novoJogo)) {
+			this.getJogos().add(novoJogo);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public double getDinheiro() {
+		return dinheiro;
+	}
+
+	public void setDinheiro(double dinheiro) throws Exception {
+		if (dinheiro < 0)
+			throw new ParametroNumeroNegativo("Valor não pode ser negativo");
+		this.dinheiro = dinheiro;
+	}
+
+	public int getX2p() {
+		return x2p;
+	}
+
+	public void setX2p(int x2p) throws Exception {
+		if (x2p < 0)
+			throw new ParametroNumeroNegativo("Valor não pode ser negativo");
+		this.x2p = this.getX2p() + x2p;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) throws Exception {
+		if (login.trim().equals("") || login == null) {
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		}
+		this.login = login;
+	}
+
+	public void registraJogada(String nomeJogo, int score, boolean zerou) throws Exception {
+		if (nomeJogo.trim().equals("") || nomeJogo == null)
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		Jogo novoJogo = this.getJogo(nomeJogo);
+		if (score < 0)
+			throw new ParametroNumeroNegativo("Valor não pode ser negativo");
+		this.setX2p(novoJogo.registraJogada(score, zerou));
+	}
+
+	public void Comprar(Jogo novoJogo) throws Exception {
+
+	}
+
+	public void x2pPorCompra(Jogo novoJogo) throws Exception {
+
+	}
+
+	private Jogo getJogo(String nomeJogo) throws Exception {
+		if (nomeJogo.trim().equals("") || nomeJogo == null)
+			throw new ParametroNuloOuVazio("Nome não pode ser nulo ou vazio");
+		for (Jogo novoJogo : jogosComprados) {
+			if (novoJogo.getNome().equalsIgnoreCase(nomeJogo))
+				return novoJogo;
+		}
+		return null;
+	}
+
+	public double getTotalPreco() {
+		double total = 0;
+		for (Jogo jogo : jogosComprados) {
+			total += jogo.getPreco();
+		}
+		return total;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		return true;
+	}
+
+}
