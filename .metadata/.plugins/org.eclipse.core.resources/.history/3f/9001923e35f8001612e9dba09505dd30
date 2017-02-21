@@ -1,0 +1,20 @@
+package Central_de_Games;
+
+import Exceptions.ParametroNuloOuVazio;
+import Exceptions.ParametroNumeroNegativo;
+
+public class FactoryJogo {
+
+	private Jogo jogo;
+
+	public FactoryJogo(String nome, double preco, Tipo tipo) throws ParametroNuloOuVazio, ParametroNumeroNegativo {
+		Jogo novoJogo = new Jogo(nome, preco, tipo);
+	}
+
+	public Jogo getJogo() {
+		return jogo;
+	}
+	
+	
+
+}

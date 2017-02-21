@@ -1,0 +1,9 @@
+package Central_de_Games;
+
+import java.util.HashMap;
+
+public class LojaController {
+
+	private HashMap<Usuario> listaUsuarios;
+
+}

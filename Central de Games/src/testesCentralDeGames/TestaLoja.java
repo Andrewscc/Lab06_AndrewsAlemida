@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Central_de_Games.Loja;
+import Central_de_Games.LojaController;
 import Central_de_Games.Noob;
 import Central_de_Games.Tipo;
 import Central_de_Games.Veterano;
@@ -15,12 +15,12 @@ import junit.framework.Assert;
 
 public class TestaLoja {
 
-	private Loja loja;
+	private LojaController loja;
 	private Noob n1;
 
 	@Before
 	public void setUP() throws Exception {
-		loja = new Loja();
+		loja = new LojaController();
 		n1 = new Noob("Matheus", "matheus.Gaudencio");
 
 	}
