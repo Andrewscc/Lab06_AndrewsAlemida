@@ -1,0 +1,14 @@
+package Central_de_Games;
+
+import easyaccept.*;
+
+public class LojaFacade {
+
+	public static void main(String[] args) {
+
+		args = new String[] { "LojaFace", "acceptance_teste/us1.txt" };
+		EasyAccept.main(args);
+
+	}
+
+}

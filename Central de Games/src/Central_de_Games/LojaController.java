@@ -3,13 +3,23 @@ package Central_de_Games;
 import java.util.ArrayList;
 
 import Exceptions.ParametroNuloOuVazio;
+import Exceptions.ParametroNumeroNegativo;
 import Exceptions.UsuarioJaCadastrado;
+import Factorys.FactoryDeUsuario;
+import Factorys.FactoryJogo;
+import Jogo.Jogo;
+import Jogo.Tipo;
+import Jogo.Jogabilidade;
+import Usuarios.Usuario;
+import Usuarios.Veterano;
+import Usuarios.Noob;
 
 public class LojaController {
 
 	private ArrayList<Usuario> listaUsuarios;
 	public final String NL = System.lineSeparator();
 	private FactoryJogo constroiJogo;
+	private FactoryDeUsuario criadorUsuario;
 
 	public LojaController() {
 
@@ -19,27 +29,27 @@ public class LojaController {
 		 * @author Andrews
 		 */
 		this.listaUsuarios = new ArrayList<>();
+		this.constroiJogo = new FactoryJogo();
+		this.criadorUsuario = new FactoryDeUsuario();
 	}
-
 	/**
 	 * Adiciona um usu�rio a loja caso ele ainda n�o esteja, lan�ando exce��o se
 	 * j� for cadastrado na loja ou seo m�todo receber parametros inv�lidos
 	 * 
 	 * @param novoUsuario
+	 * @throws ParametroNumeroNegativo
+	 * @throws ParametroNuloOuVazio
+	 * @throws UsuarioJaCadastrado
 	 */
-	public void adicionaUsuario(Usuario novoUsuario) {
-		try {
-			if (novoUsuario == null) {
-				throw new ParametroNuloOuVazio("Usuario n�o pode ser nulo");
-			} else if (listaUsuarios.contains(novoUsuario)) {
-				throw new UsuarioJaCadastrado("Us�ario j� cadastrado");
-			} else {
-				listaUsuarios.add(novoUsuario);
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-
+	public void adicionaUsuario(String nome, String login, String tipoDeUsuario)
+			throws ParametroNuloOuVazio, ParametroNumeroNegativo, UsuarioJaCadastrado {
+		Usuario novoUsuario = criadorUsuario.criaUsuario(nome, login, tipoDeUsuario);
+		if (novoUsuario == null) {
+			throw new ParametroNuloOuVazio("Usuario não pode ser nulo");
+		} else if (listaUsuarios.contains(novoUsuario)) {
+			throw new UsuarioJaCadastrado("Usuario já cadastrado");
+		} else {
+			listaUsuarios.add(novoUsuario);
 		}
 	}
 
@@ -89,16 +99,19 @@ public class LojaController {
 	 * @param nome
 	 * @param preco
 	 * @param tipo
+	 * @throws ParametroNumeroNegativo
+	 * @throws ParametroNuloOuVazio
 	 */
-	public void venderJogo(String login, String nome, double preco, Tipo tipo) {
-		this.constroiJogo = new FactoryJogo(login, preco, tipo);
+	public void venderJogo(String login, String nome, double preco, Tipo tipo)
+			throws ParametroNuloOuVazio, ParametroNumeroNegativo, Exception {
+
+		Jogo novoJogo = constroiJogo.criaJogo(login, preco, tipo);
 		Usuario novoUsuario = usuarioPorLogin(login);
-		if (!novoUsuario.jogosComprados.contains(novoJogo) && novoUsuario.getDinheiro() >= novoJogo.getPreco())
-			try {
-				novoUsuario.Comprar(novoJogo);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if (!novoUsuario.getJogos().contains(novoJogo) && novoUsuario.getDinheiro() >= novoJogo.getPreco()) {
+			novoUsuario.Comprar(novoJogo);
+		} else {
+			throw new Exception("Usuario já possui jogo");
+		}
 	}
 
 	/**
@@ -120,7 +133,7 @@ public class LojaController {
 						novoVeterano.setX2p(novoUsuario.getX2p());
 						novoVeterano.setJogosComprados(novoUsuario.getJogos());
 						listaUsuarios.remove(novoUsuario);
-						adicionaUsuario(novoVeterano);
+						listaUsuarios.add(novoVeterano);
 					} else {
 						throw new Exception("Usuario j� � veterano");
 					}

@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Central_de_Games.LojaController;
-import Central_de_Games.Noob;
-import Central_de_Games.Tipo;
-import Central_de_Games.Veterano;
 import Exceptions.ParametroNuloOuVazio;
 import Exceptions.ParametroNumeroNegativo;
+import Jogo.Tipo;
+import Usuarios.Noob;
+import Usuarios.Veterano;
 import junit.framework.Assert;
 
 public class TestaLoja {

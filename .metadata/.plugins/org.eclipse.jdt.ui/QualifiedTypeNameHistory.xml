@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="Central_de_Games.FactoryJogo"/>
+<fullyQualifiedTypeName name="Central_de_Games.FactoryDeUsuario"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,15 @@
+package Central_de_Games;
+
+import Exceptions.ParametroNuloOuVazio;
+import Exceptions.ParametroNumeroNegativo;
+
+public class FactoryDeUsuario {
+
+	public Usuario criaUsuario(String nome, String login, String tipoDeUsuario)
+			throws ParametroNuloOuVazio, ParametroNumeroNegativo {
+		if (tipoDeUsuario.equals("Noob"))
+			return new Noob(nome, login);
+		return null;
+	}
+
+}

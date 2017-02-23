@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Central_de_Games.Jogo;
-import Central_de_Games.Tipo;
 import Exceptions.ParametroNuloOuVazio;
 import Exceptions.ParametroNumeroNegativo;
+import Jogo.Jogo;
+import Jogo.Tipo;
 
 public class TestaJogo {
 

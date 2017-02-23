@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Central_de_Games.Noob;
-import Central_de_Games.Usuario;
-import Central_de_Games.Veterano;
 import Exceptions.ParametroNuloOuVazio;
 import Exceptions.ParametroNumeroNegativo;
+import Usuarios.Noob;
+import Usuarios.Usuario;
+import Usuarios.Veterano;
 
 public class TestaUsuario {
 
